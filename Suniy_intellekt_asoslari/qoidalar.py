@@ -1,78 +1,49 @@
-import random
-def qoidalar(s):
-    a = []
-    if 'hiragana' in s and 'katakana' in s and 'kanji' in s:
-        a.append(1)
-    if 'sakura_ramz' in s:
-        a.append(2)
-    if 'f1' in s and 'texnologik' in s:
-        a.append(3)
-    if 'mehnatkash' in s and 'intizimli' in s:
-        a.append(4)
-    if 'tinch_okeanida' in s:
-        a.append(5)
-    if 'osiyo' in s and 'orollar_davlati' in s:
-        a.append(6)
-    if 'iqtisodiy_rivojlangan' in s:
-        a.append(7)
-    if 'madaniyatli' in s and 'texnik' in s and 'g7' in s:
-        a.append(8)
-    if 'tabiatga_sigishili' in s:
-        if 'sharq_etika' in s:
-            if 'sharqiy_osiyo_davlati' in s:
-                if 'g7' in s:
-                    if 'toyota' in s:
-                        a.append(9)
-    if 'tokyo' in s:
-        a.append(10)
+def avtobus_ekspert_tizimi(faktlar):
+    print(f"Boshlang'ich faktlar: {faktlar}\n")
+    
+    yangi_fakt_topildi = True
+    while yangi_fakt_topildi:
+        yangi_fakt_topildi = False
+        
+        # 11-QOIDA: Elektr -> Elektromobil
+        if 'elektr' in faktlar and 'elektromobil' not in faktlar:
+            faktlar.add('elektromobil')
+            print("[Qoida 11] Qo'llandi: Elektr -> Elektromobil")
+            yangi_fakt_topildi = True
 
-    return a
+        # 6-QOIDA: Gaz -> Gazda yuruvchi
+        if 'gaz' in faktlar and 'gazda_yuruvchi' not in faktlar:
+            faktlar.add('gazda_yuruvchi')
+            print("[Qoida 6] Qo'llandi: Gaz -> Gazda yuruvchi")
+            yangi_fakt_topildi = True
 
-def bajar(k, s):
-    if k == 1:
-        for x in ['hiragana', 'katakana', 'kanji']:
-            s.remove(x)
-        s.append('madaniyatli')
-    if k == 2:
-        s.remove('sakura_ramz'):
-        s.append('tabiatga_sigishili')
-    if k == 3:
-        for x in ['f1', 'texnologik']:
-            s.remove(x)
-        s.append('texnik')
-    if k == 4:
-        for x in ['mehnatkash', 'intizimli']:
-            s.remove(x)
-        s.append('sharq_etika')
-    if k == 5:
-        s.remove('tinch_okeanida');
-        s.append('orollar_davlati')
-    if k == 6:
-        for x in ['osiyo', 'orollar_davlati']:
-            s.remove(x)
-        s.append('sharqiy_osiyo_davlati')
-    if k == 7:
-        s.remove('iqtisodiy_rivojlangan');
-        s.append('g7')
-    if k == 8:
-        for x in ['madaniyatli', 'texnik']:
-            s.remove(x)
-        s.append('toyota')
-    if k == 9:
-        for x in ['tabiatga_sigishili', 'sharq_etika', 'sharqiy_osiyo_davlati', 'g7', 'toyota']:
-            s.remove(x)
-        s.append('tokyo')
-    if k == 10:
-        s.remove('tokyo');
-        s.append('Yaponiya')
-    return s
+        # 2-QOIDA: Yo'lovchi tashish + Shinam o'rindiqlar -> D toifa
+        if 'yolovchi_tashish' in faktlar and 'shinam_orin' in faktlar and 'd_toifa' not in faktlar:
+            faktlar.add('d_toifa')
+            print("[Qoida 2] Qo'llandi: Yo'lovchi tashish + Shinam o'rin -> D toifa")
+            yangi_fakt_topildi = True
 
-if __name__ == "__main__":
-    print("Boshlang'ich faktlarni kiriting (joy tashlab):")
-    # malumot = input("> ").lower().split()
-    s = ['hiragana','sakura_ramz','f1','texnologik','mehnatkash','intizimli','katakana','tinch_okeanida','osiyo','iqtisodiy_rivojlangan']
-    karilatsiya = qoidalar(s)
-    for i in range(len(karilatsiya)):
-        random_natijasi = random.choice(karilatsiya)
-        print(f"{random_natijasi}qoidaga kora bajardi {karilatsiya}")
-        # bajardi = bajar(random_natijasi,s)
+        # 5-QOIDA: Elektromobil + Gazda yuruvchi -> Gibrid
+        if 'elektromobil' in faktlar and 'gazda_yuruvchi' in faktlar and 'gibrid' not in faktlar:
+            faktlar.add('gibrid')
+            print("[Qoida 5] Qo'llandi: Elektromobil + Gazda yuruvchi -> Gibrid")
+            yangi_fakt_topildi = True
+
+        # 8-QOIDA: Gibrid + D toifa -> AVTOBUS
+        if 'gibrid' in faktlar and 'd_toifa' in faktlar and 'avtobus' not in faktlar:
+            faktlar.add('avtobus')
+            print("[Qoida 8] Yakuniy xulosa: Gibrid + D toifa -> AVTOBUS")
+            yangi_fakt_topildi = True
+
+    return faktlar
+
+# --- Tizimni ishga tushirish ---
+# Siz bergan atributlar: Gaz, Yo'lovchi tashish, Elektr, Shinam_o'
+boshlangich_bilimlar = {'gaz', 'yolovchi_tashish', 'elektr', 'shinam_orin'}
+
+natija = avtobus_ekspert_tizimi(boshlangich_bilimlar)
+
+if 'avtobus' in natija:
+    print("\nNatija: Bu transport vositasi - AVTOBUS!")
+else:
+    print("\nNatija: Avtobus ekanligini aniqlash uchun yetarli faktlar topilmadi.")
