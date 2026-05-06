@@ -35,7 +35,7 @@ def predict(X_train, y_train, X_test, k, distance_func):
 
 #  Accuracy
 def accuracy(y_true, y_pred):
-    return np.mean(y_true == y_pred)
+    return np.mean(y_true == y_pred)*100
 
 
 #  Eng yaxshi K ni topish
